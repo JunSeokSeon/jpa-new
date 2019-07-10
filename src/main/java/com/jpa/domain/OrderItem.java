@@ -1,6 +1,5 @@
 package com.jpa.domain;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,24 +17,23 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @Entity
-@Table
-public class Member {
+@Table(name = "order_item")
+public class OrderItem {
 	
 	@Id
-	@Column(name = "member_id")
+	@Column(name = "order_item_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@Column
-	private String name;
-	
-	@Column
-	private String city;
+    private Long id;
+
+    @Column
+    private Long itemId;
     
-	@Column
-	private String street;
+    @Column
+    private Long orderId;
+
+    @Column
+    private int orderPrice;
     
-	@Column
-	private String zipcode;
-	
+    @Column
+    private int count;
 }

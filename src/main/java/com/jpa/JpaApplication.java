@@ -1,13 +1,9 @@
 package com.jpa;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-
-import com.jpa.domain.Member;
 
 
 /**
@@ -24,7 +20,7 @@ public class JpaApplication {
 		
 		try {
 			tx.begin();
-			logic(em);
+			//logic(em);
 			tx.commit();
 		} catch(Exception e) {
 			tx.rollback();
@@ -37,6 +33,7 @@ public class JpaApplication {
 	
 	public static void logic(EntityManager em) {
 		
+		/**
 		Member member = Member.builder()
 			.userName("junseok")
 			.age(15)
@@ -52,6 +49,8 @@ public class JpaApplication {
         System.out.println("members.size=" + members.size());
         
         //em.remove(member);
+        */
+		
 	}
 
 }

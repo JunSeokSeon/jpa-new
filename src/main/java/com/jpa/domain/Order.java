@@ -1,8 +1,11 @@
 package com.jpa.domain;
 
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,24 +21,21 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @Entity
-@Table
-public class Member {
+@Table(name = "orders")
+public class Order {
 	
 	@Id
-	@Column(name = "member_id")
+    @Column(name = "order_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@Column
-	private String name;
-	
-	@Column
-	private String city;
+    private Long id;
+
+    @Column
+    private Long memberId;
+
+    @Column
+    private LocalDateTime orderDate;
     
-	@Column
-	private String street;
-    
-	@Column
-	private String zipcode;
-	
+    @Column
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 }
