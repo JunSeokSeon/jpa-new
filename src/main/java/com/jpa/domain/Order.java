@@ -29,7 +29,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "orders", uniqueConstraints = {@UniqueConstraint(name = "uk_orders_01", columnNames = "delivery_id")})
-public class Order {
+public class Order extends BaseEntity {
 	
 	@Id
     @Column(name = "order_id")

@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.jpa.domain.item.Item;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

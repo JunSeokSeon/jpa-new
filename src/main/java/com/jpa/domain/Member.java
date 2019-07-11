@@ -22,7 +22,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table
-public class Member {
+public class Member extends BaseEntity {
 	
 	@Id
 	@Column(name = "member_id")
