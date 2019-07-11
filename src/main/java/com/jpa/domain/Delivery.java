@@ -1,6 +1,7 @@
 package com.jpa.domain;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -29,14 +30,8 @@ public class Delivery {
 	@OneToOne(mappedBy = "delivery")
 	private Order order;
 	
-	@Column
-	private String city;
-    
-	@Column
-	private String street;
-    
-	@Column
-	private String zipcode;
+	@Embedded
+	private Address address;
 	
 	@Column
 	@Enumerated(EnumType.STRING)
@@ -44,7 +39,6 @@ public class Delivery {
 
 	@Override
 	public String toString() {
-		return "Delivery [id=" + id + ", city=" + city + ", street=" + street + ", zipcode=" + zipcode + ", status="
-				+ status + "]";
+		return "Delivery [id=" + id + ", address=" + address + ", status=" + status + "]";
 	}
 }
