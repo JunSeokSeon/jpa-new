@@ -2,6 +2,7 @@ package com.jpa.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,11 +29,11 @@ public class OrderItem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "item_id", foreignKey = @ForeignKey(name = "fk_order_item_01"))
     private Item item;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "order_id", foreignKey = @ForeignKey(name= "fk_order_item_02"))
     private Order order;
 
