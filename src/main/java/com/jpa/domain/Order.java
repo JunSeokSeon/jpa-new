@@ -15,7 +15,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -26,7 +28,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "orders")
+@Table(name = "orders", uniqueConstraints = {@UniqueConstraint(name = "uk_orders_01", columnNames = "delivery_id")})
 public class Order {
 	
 	@Id
@@ -41,6 +43,11 @@ public class Order {
 	
 	@OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems = new ArrayList<OrderItem>();
+	
+	@Setter(AccessLevel.NONE)
+	@OneToOne
+	@JoinColumn(name="delivery_id", foreignKey = @ForeignKey(name = "fk_orders_02"))
+	private Delivery delivery;
 
     @Column
     private LocalDateTime orderDate;
@@ -62,6 +69,11 @@ public class Order {
         orderItems.add(orderItem);
         orderItem.setOrder(this);
     }
+	
+	public void setDelivery(Delivery delivery) {
+		this.delivery = delivery;
+		delivery.setOrder(this);
+	}
 
 	@Override
 	public String toString() {

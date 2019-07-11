@@ -1,15 +1,13 @@
 package com.jpa.domain;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -21,27 +19,32 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table
-public class Item {
+public class Delivery {
 	
 	@Id
-    @Column(name = "item_id")
+	@Column(name = "delivery_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-	@Column
-    private String name;
-    
-	@Column
-	private int price;
-    
-	@Column
-	private int stockQuantity;
+	private Long id;
 	
-	@ManyToMany(mappedBy = "items")
-	private List<Category> categories = new ArrayList<Category>();
+	@OneToOne(mappedBy = "delivery")
+	private Order order;
+	
+	@Column
+	private String city;
+    
+	@Column
+	private String street;
+    
+	@Column
+	private String zipcode;
+	
+	@Column
+	@Enumerated(EnumType.STRING)
+	private DeliveryStatus status;
 
 	@Override
 	public String toString() {
-		return "Item [id=" + id + ", name=" + name + ", price=" + price + ", stockQuantity=" + stockQuantity + "]";
+		return "Delivery [id=" + id + ", city=" + city + ", street=" + street + ", zipcode=" + zipcode + ", status="
+				+ status + "]";
 	}
 }

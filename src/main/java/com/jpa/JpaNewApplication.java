@@ -26,13 +26,13 @@ public class JpaNewApplication {
 	@Transactional
 	public void method() {
 		
-		Member member = Member.builder()
-				.name("junseok")
-				.city("korea")
-				.zipcode("aa")
-				.street("st")
-				.build();
-		
-		this.em.persist(member);
+//		Member member = Member.builder()
+//				.name("junseok")
+//				.city("korea")
+//				.zipcode("aa")
+//				.street("st")
+//				.build();
+//		
+//		this.em.persist(member);
 	}
 }
