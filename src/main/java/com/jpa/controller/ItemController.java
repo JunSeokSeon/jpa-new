@@ -36,7 +36,7 @@ public class ItemController {
      * 상품 수정 폼
      */
     @RequestMapping(value = "/items/{itemId}/edit", method = RequestMethod.GET)
-    public String updateItemForm(@PathVariable("itemId") Long itemId, Model model) {
+    public String updateItemForm(@PathVariable("itemId") Long itemId, Model model) throws Exception {
 
         Item item = itemService.findOne(itemId);
         model.addAttribute("item", item);

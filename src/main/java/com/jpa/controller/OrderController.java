@@ -39,7 +39,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/order", method = RequestMethod.POST)
-    public String order(@RequestParam("memberId") Long memberId, @RequestParam("itemId") Long itemId, @RequestParam("count") int count) {
+    public String order(@RequestParam("memberId") Long memberId, @RequestParam("itemId") Long itemId, @RequestParam("count") int count) throws Exception {
 
         orderService.order(memberId, itemId, count);
         return "redirect:/orders";
@@ -55,7 +55,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/orders/{orderId}/cancel")
-    public String processCancelBuy(@PathVariable("orderId") Long orderId) {
+    public String processCancelBuy(@PathVariable("orderId") Long orderId) throws Exception {
 
         orderService.cancelOrder(orderId);
 

@@ -15,6 +15,8 @@ import com.jpa.domain.item.Item;
 import com.jpa.repository.MemberRepository;
 import com.jpa.repository.OrderRepository;
 
+import javassist.NotFoundException;
+
 @Service
 @Transactional
 public class OrderService {
@@ -29,10 +31,10 @@ public class OrderService {
     ItemService itemService;
 
     /** 주문 */
-    public Long order(Long memberId, Long itemId, int count) {
+    public Long order(Long memberId, Long itemId, int count) throws NotFoundException {
 
         //엔티티 조회
-        Member member = memberRepository.findOne(memberId);
+        Member member = memberRepository.findById(memberId).orElseThrow(() -> new NotFoundException("Unable to get Member with memberId = " + memberId));
         Item item = itemService.findOne(itemId);
 
         //배송정보 생성
@@ -49,10 +51,10 @@ public class OrderService {
 
 
     /** 주문 취소 */
-    public void cancelOrder(Long orderId) {
+    public void cancelOrder(Long orderId) throws Exception {
 
         //주문 엔티티 조회
-        Order order = orderRepository.findOne(orderId);
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new NotFoundException("Unable to get orderId with orderId = " + orderId));
 
         //주문 취소
         order.cancel();
@@ -60,6 +62,6 @@ public class OrderService {
 
     /** 주문 검색 */
     public List<Order> findOrders(OrderSearch orderSearch) {
-        return orderRepository.findAll(orderSearch);
+        return orderRepository.findAll(orderSearch.toSpecification());
     }
 }

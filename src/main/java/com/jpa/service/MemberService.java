@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jpa.domain.Member;
 import com.jpa.repository.MemberRepository;
 
+import javassist.NotFoundException;
+
 @Service
 @Transactional
 public class MemberService {
@@ -40,7 +42,7 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
-    public Member findOne(Long memberId) {
-        return memberRepository.findOne(memberId);
+    public Member findOne(Long memberId) throws NotFoundException {
+        return memberRepository.findById(memberId).orElseThrow(() -> new NotFoundException("Unable to get Member with memberId = " + memberId));
     }
 }
